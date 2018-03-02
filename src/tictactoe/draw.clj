@@ -14,7 +14,7 @@
 (defn draw-circle
   [x y size]
   (let [translate (fn [x] (+ (/ size 2) (* size x)))
-        spacing (* 0.20 size)
+        spacing (* 0.3 size)
         real-x (translate x)
         real-y (translate y)
         real-size (- size spacing)]
@@ -61,6 +61,6 @@
         c1-y (translate (nth c1 1))
         c2-x (translate (nth c2 0))
         c2-y (translate (nth c2 1))]
-    (q/stroke 0 0 0)
+    (q/stroke 0 0 0 200)
     (q/stroke-weight 5)
     (draw-line [c1-x c1-y c2-x c2-y])))

@@ -6,8 +6,9 @@
             [tictactoe.board :as board]))
 
 (def game
- {:size {:width 400 :height 400}
-  :cell {:size 50}})
+ {:size {:width 300 :height 300}
+  :cell {:size 25}
+  :win-count 5})
 
 (defn create-initial-state
  [game]
@@ -42,7 +43,7 @@
 (defn update-game-status
   [state]
   (let [player (:player state)
-        won (board/get-winning-cells player (:board state))]
+        won (board/get-winning-cells player state)]
     (assoc state :status (if won ::board/FINISHED ::board/PLAY))))
 
 (defn make-move
@@ -96,8 +97,8 @@
   (draw/draw-lines (board/get-col-lines state))
   (draw/draw-cells state)
   (let [board (:board state)
-        win-circle (board/get-winning-cells ::board/CIRCLE board)
-        win-cross (board/get-winning-cells ::board/CROSS board)
+        win-circle (board/get-winning-cells ::board/CIRCLE state)
+        win-cross (board/get-winning-cells ::board/CROSS state)
         win (or win-circle win-cross)]
     (when (not (nil? win)) (draw/draw-win win state))))
 

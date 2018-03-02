@@ -98,12 +98,13 @@
     (group-and-find-seqs mapped 3 1)))
 
 (defn get-winning-cells
-  [type board]
-  (let [cells (get-cells-type type board)
+  [type {board :board game :game}]
+  (let [win-count (:win-count game)
+        cells (get-cells-type type board)
         vertical (find-vertical-sequences cells)
         horizontal (find-horizontal-sequences cells)
         diagonal-l (find-diagonal-l-sequences cells)
         diagonal-r (find-diagonal-r-sequences cells)
         all (concat vertical horizontal diagonal-l diagonal-r)]
     (first
-      (filter #(>= (count %) 5) all))))
+      (filter #(>= (count %) win-count) all))))
